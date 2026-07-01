@@ -23,40 +23,40 @@ using namespace std ;
 //     }
 // } ;
 
-// Multilevel Inheritence 
-class A {
-    public :
-    A() {
-        cout<<"hello from A"<<endl ;
-    }
+// Multilevel Inheritence    AND    Destructors
+// class A {
+//     public :
+//     A() {
+//         cout<<"hello from A"<<endl ;
+//     }
 
-    ~A() {
-        cout<<"destructor of A"<<endl ;
-    }
-} ;
+//     ~A() {
+//         cout<<"destructor of A"<<endl ;
+//     }
+// } ;
 
-class B : public A {
-    public :
-    B() {
-        cout<<"hello from B"<<endl ;
-    }
-    ~B() {
-        cout<<"destructor of B"<<endl ;
-    }
-} ;
+// class B : public A {
+//     public :
+//     B() {
+//         cout<<"hello from B"<<endl ;
+//     }
+//     ~B() {
+//         cout<<"destructor of B"<<endl ;
+//     }
+// } ;
 
-class C : public B {
-    public :
-    C() {
-        cout<<"hello from C"<<endl ;
-    }
-    ~C() {
-        cout<<"destructor of C"<<endl ;
-    }
-} ;
+// class C : public B {
+//     public :
+//     C() {
+//         cout<<"hello from C"<<endl ;
+//     }
+//     ~C() {
+//         cout<<"destructor of C"<<endl ;
+//     }
+// } ;
 
 int main() {
-    C obj ;
+    // C obj ;
 
     return 0 ;
 }
