@@ -17,8 +17,13 @@ public:
 };
 int main()
 {
-    homeloan h;
-    h.verifydoc();
+    // homeloan h;
+    // h.verifydoc();
+
+    // loan obj -> ERROR!  abstract class cannot be instantiated as it is incomplete class .
+    
+    loan *l = new homeloan();
+    l->verifydoc();
 
     return 0;
 }
