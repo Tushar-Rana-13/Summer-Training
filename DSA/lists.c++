@@ -122,6 +122,96 @@ void DeleteAtPos(int pos)
     delete temp;
 }
 
+void deleteAtBeg()
+{
+    if (start == nullptr)
+        return;
+    Node *temp = start;
+    start = start->next;
+    delete temp;
+}
+
+void deleteAtEnd()
+{
+    if (start == nullptr)
+        return;
+
+    if (start->next == nullptr)
+    { // only one node
+        delete start;
+        start = nullptr;
+        return;
+    }
+
+    Node *temp = start;
+    Node *prev = nullptr;
+    while (temp->next != nullptr)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = nullptr;
+    delete temp;
+}
+
+void deleteBefore(int beforeval)
+{
+    if (start == nullptr)
+        return;
+    Node *temp = start;
+    Node *prev = nullptr;
+    while (temp->next->num != beforeval && temp->next != nullptr)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp->next == nullptr)
+    {
+        cout << "value not found !" << endl;
+        return;
+    }
+    if (prev == nullptr)
+    {
+        // curr is head
+        start = temp->next;
+        delete temp;
+    }
+    else
+    {
+        prev->next = temp->next;
+        delete temp;
+    }
+}
+
+void deleteAfter(int afterVal)
+{
+    if (start == nullptr)
+    {
+        return;
+    }
+
+    Node *temp = start;
+
+    while (temp != nullptr && temp->num != afterVal)
+    {
+        temp = temp->next;
+    }
+    if(temp == nullptr){
+        cout<<"Value not found !"<<endl;
+        return ;
+    }
+    if (temp->next == nullptr)
+    {
+        cout << "No Value to Delete !";
+    }
+    else
+    {
+        Node *toDelete = temp->next;
+        temp->next = toDelete->next;
+        delete toDelete;
+    }
+}
+
 void before(int val, int beforeval)
 {
     Node *temp = new Node(val);
@@ -150,9 +240,9 @@ void after(int val, int afterval)
 
     if (start == nullptr)
     {
-        cout<<"list is empty!"<<endl ;
-        delete temp ;
-        return ;
+        cout << "list is empty!" << endl;
+        delete temp;
+        return;
     }
 
     Node *curr = start;
@@ -161,14 +251,60 @@ void after(int val, int afterval)
     {
         curr = curr->next;
     }
-    if(curr == nullptr ) 
+    if (curr == nullptr)
     {
-        cout<<"Not found"<<endl ;
-    } else
-    {
-    temp->next = curr->next ;
-    curr->next = temp ;
+        cout << "Not found" << endl;
     }
+    else
+    {
+        temp->next = curr->next;
+        curr->next = temp;
+    }
+}
+
+void sort()
+{
+    if (!start)
+        return;
+    Node *i, *j;
+    int temp;
+    for (i = start; i->next != nullptr; i = i->next)
+    {
+        for (j = i->next; j != nullptr; j = j->next)
+        {
+            if (i->num > j->num)
+            {
+                temp = i->num;
+                i->num = j->num;
+                j->num = temp;
+            }
+        }
+    }
+}
+
+void reverse()
+{
+    Node *prev = nullptr, *curr = start, *next = nullptr;
+    while (curr)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    start = prev;
+}
+
+int count_nodes()
+{
+    int count = 0;
+    Node *temp = start;
+    while (temp != nullptr)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
 }
 
 int main()
@@ -182,11 +318,13 @@ int main()
         cout << "3. Insert at Position\n";
         cout << "4. Display\n";
         cout << "5. Delete at Position\n";
-        cout << "6. Edit at Position\n";
-        cout << "7. Count Nodes\n";
-        cout << "8. Sort List\n";
-        cout << "9. Reverse List\n";
-        cout << "10. Exit\n";
+        cout << "6. Delete at Beginning\n";
+        cout << "7. Delete at End\n";
+        cout << "8. Edit at Position\n";
+        cout << "9. Sort List\n";
+        cout << "10. Reverse List\n";
+        cout << "11. Count Nodes\n";
+        cout << "12. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
 
@@ -216,28 +354,33 @@ int main()
             DeleteAtPos(pos);
             break;
         case 6:
+            deleteAtBeg();
+            break;
+        case 7:
+            deleteAtEnd();
+            break;
+        case 8:
             cout << "Enter new value and position: ";
             cin >> val >> pos;
             edit(val, pos);
             break;
-        // case 7:
-        //     cout << "Total nodes: " << Count() << endl;
-        //     break;
-        // case 8:
-        //     Sort();
-        //     cout << "List sorted!" << endl;
-        //     break;
-        // case 9:
-        //     Reverse();
-        //     cout << "List reversed!" << endl;
-        //     break;
+        case 9:
+            sort();
+            cout << "List sorted!" << endl;
+            break;
         case 10:
+            reverse();
+            cout << "List reversed!" << endl;
+            break;
+        case 11:
+            cout << "Total Nodes :" << count_nodes() << endl;
+        case 12:
             cout << "Exiting..." << endl;
             break;
         default:
             cout << "Invalid choice!" << endl;
         }
-    } while (choice != 10);
+    } while (choice != 12);
 
     return 0;
 }
