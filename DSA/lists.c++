@@ -196,9 +196,10 @@ void deleteAfter(int afterVal)
     {
         temp = temp->next;
     }
-    if(temp == nullptr){
-        cout<<"Value not found !"<<endl;
-        return ;
+    if (temp == nullptr)
+    {
+        cout << "Value not found !" << endl;
+        return;
     }
     if (temp->next == nullptr)
     {
