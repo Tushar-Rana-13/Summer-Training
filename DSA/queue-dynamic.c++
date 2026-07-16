@@ -50,7 +50,7 @@ public:
     }
 
     // Check if empty
-    bool isEmpty() {
+    bool isEmpty() {    
         return (front == nullptr);
     }
 
